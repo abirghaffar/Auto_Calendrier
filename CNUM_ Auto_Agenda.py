@@ -39,7 +39,7 @@ for index, row in df.iterrows():
 # Écrire le calendrier dans un fichier .ics
 with open('mon_calendrier.ics', 'w') as my_file:
     my_file.writelines(cal)
-    
+### Autrement     
 with open('mon_calendrier.ics', 'w') as my_file:
     my_file.write(cal.serialize())
 
