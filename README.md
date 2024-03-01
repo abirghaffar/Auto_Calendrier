@@ -7,7 +7,7 @@ Démarche du travail:
 
 * Etape 1 : formatage de base des données intiale,qui réprésente un fichier Excel contenant les calandriers des cours de Master SIGMA pour l'année 2023/2024, et création d'un nouveau fichier de la même format .xls mais plus structuré en utilisant le code python copié 
 çi-dessous pour automatiser l'étape : 
-###############
+
 import os
 import pandas as pd
 import openpyxl
@@ -88,10 +88,10 @@ for row in ws.iter_rows():
 
 # Save the workbook
 excel_writer.save()
-################################
+
 
 * Etape 2: Passage du format xls vers un format ics qui sera importer automatiquement dans Agenda Google après avoir realisé une étape d'activation des API Google Calander et télechargement du fichier .json qu'est disponible en ligne via le scipt çi-dessous : 
-################################
+
 import pandas as pd
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -159,8 +159,7 @@ event = service.events().insert(calendarId='c519ec700f2eef68a4a7e75608be062c9bd7
 
 print('Événement créé : %s' % (event.get('htmlLink')))
 
-############################################
 
 * Etape 3 : Exportation du calandrier pour retourner à la base de données initiale  
   
- : 22
+
