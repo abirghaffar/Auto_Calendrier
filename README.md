@@ -100,16 +100,17 @@ from googleapiclient.discovery import build
 from datetime import datetime
 
 # Chemin vers votre fichier Excel
-excel_path = "C:/Users/abir/Documents/Auto_Calendrier/Calandrier.xlsx"
+excel_path = "C:/Users/abir/Documents/Projet _ Conception numerique/Calebdrier_M1_M2.xlsx"
 
 # Charger le fichier Excel
 df = pd.read_excel(excel_path)
 df.index
 df.Start_Date = pd.Series(df.Start_Date).fillna(method='ffill')
 df.End_Date = pd.Series(df.End_Date).fillna(method='ffill')
+
 # Chemin vers le fichier credentials.json
 creds = None
-creds_path = "C:/Users/abir/Documents/Projet _ Conception numerique/credentials.json.json"
+creds_path = "C:/Users/abir/Documents/Auto_Calendrier/credentials.json.json"
 
 # Si nécessaire, changez le scope selon vos besoins
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -123,29 +124,26 @@ service = build('calendar', 'v3', credentials=creds)
 for i in range(len(df)):
     row = df.iloc[i]
     print(row['Start_Date'])
-    print(datetime.strptime(str(row['Start_Date'], '%Y-%m-%d %H:%M:%S')))
-    print(row['End_Date'])
-    print(datetime.strptime(str(row['End_Date'], '%Y-%m-%d %H:%M:%S')))
-    print(row['Start_Time'])
-    print(datetime.strptime(str(row['Start_Time'], '%H:%M:%S')))
+    print(datetime.strptime(str(row['Start_Date']), 
+                                       '%Y-%m-%d %H:%M:%S'))
     print(row['End_Time'])
-    print(datetime.strptime(str(row['End_Time'], '%H:%M:%S')))
-
-    # Conversion des chaînes de dates en objets datetime
-    start_datetime = datetime.strptime(str(row['Start_Date'].strftime('%Y-%m-%d') )
-                                       + ' ' 
-                                       + (str(row['Start_Time'].strftime('%H:%M:%S'))),
-                                       '%Y-%m-%d %H:%M:%S')
+    print(datetime.strptime(str(row['End_Time']), 
+                                       '%Y-%m-%d %H:%M:%S'))
+# Conversion des chaînes de dates en objets datetime
+start_datetime = datetime.strptime(str(row['Start_Date']).strftime('%Y-%m-%d') 
+                                   + ' ' 
+                                   + str(row['Start_Time']).strftime('%H:%M:%S'),
+                                   '%Y-%m-%d %H:%M:%S')
                                    
-    end_datetime = datetime.strptime(str(row['End_Date'].strftime('%Y-%m-%d'))
-                                     + ' ' + 
-                                     (str(row['End_Time'].strftime('%H:%M:%S'))),
-                                     '%Y-%m-%d %H:%M:%S')
+end_datetime = datetime.strptime(str(row['End_Date']).strftime('%Y-%m-%d') 
+                                 + ' ' + 
+                                 str(row['End_Time']).strftime('%H:%M:%S'),
+                                 '%Y-%m-%d %H:%M:%S')
                                  
 event = {
       'summary': row['Unit'],
       'location': row['Location'],
-      'description': row['Description']+row['Intervenant'],
+      'description': str(row['Description'])+ str(row['Intervenant']),
       'start': {
         'dateTime': start_datetime.isoformat()+'-'+ end_datetime.isoformat(),
         'timeZone': 'Europe/Paris',
@@ -156,9 +154,11 @@ event = {
       },
     }
 
-event = service.events().insert(calendarId='primary', body=event).execute()
+event = service.events().insert(calendarId='c519ec700f2eef68a4a7e75608be062c9bd7430c55c2fa2a2517f190647e78f0@group.calendar.google.com',
+                                body=event).execute()
 
 print('Événement créé : %s' % (event.get('htmlLink')))
+
 ############################################
 
 * Etape 3 : Exportation du calandrier pour retourner à la base de données initiale  
