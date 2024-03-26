@@ -20,6 +20,8 @@ Création d'un code Python qui facilitera l’exportation  du contenu du fichier
 Enfin, pour synchroniser les changements effectués sur le fichier Excel initial, il suffit de sauvegarder ces changements, puis de relancer le code pour actualiser l’agenda publié sur internet.
 
 
-* Etape 3 : Exportation du calandrier pour retourner à la base de données initiale  via l'excution d'un deuxiéme script python 
+* Etape 3 : Exportation du calandrier pour retourner à la base de données initiale  via l'excution d'un deuxiéme script python
+Notes:
+*Avant de lancer le script Python “mean_code.py” disponible dans ce répertoire, assurez-vous d’avoir un compte Google. Avec ce compte, créez un projet Google Cloud qui vous permettra d’utiliser les API Google. N’oubliez pas de télécharger le fichier .json qui sera nécessaire pour l’exécution de ce script.
   
 
